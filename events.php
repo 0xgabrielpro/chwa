@@ -1,7 +1,4 @@
-<!-- <?php
- // require_once("classes/DBConnection.php");
- ?> -->
- <section class="page-section bg-dark" id="events">
+<section class="page-section bg-dark" id="events">
      <div class="container">
          <h2 class="text-center">Events</h2>
          <div class="d-flex w-100 justify-content-center">
@@ -11,16 +8,8 @@
              <?php
              $events = $conn->query("SELECT * FROM `events` ORDER BY rand()");
              while ($row = $events->fetch_assoc()):
-                 $video_path = '';
-                 if (is_dir(base_app . 'uploads/event_' . $row['id'])) {
-                     $files = scandir(base_app . 'uploads/event_' . $row['id']);
-                     foreach ($files as $file) {
-                         if (preg_match('/\.(mp4|webm|ogg)$/i', $file)) {
-                             $video_path = 'uploads/event_' . $row['id'] . '/' . $file;
-                             break;
-                         }
-                     }
-                 }
+                 $video_path = $row['video_path'];
+                
                  $row['description'] = strip_tags(stripslashes(html_entity_decode($row['description'])));
                  // $review = $conn->query("SELECT * FROM `rate_review` WHERE event_id='{$row['id']}'");
                  // $review_count = $review->num_rows;
@@ -49,8 +38,7 @@
                                      <input disabled class="star star-1" id="star-1" type="radio" name="star" <?php // echo $rate == 1 ? "checked" : '' ?>/> <label class="star star-1" for="star-1"></label> 
                                  </div>
                              </form>
-                         </div> -->
-                         <p class="card-text truncate"><?php echo $row['description'] ?></p>
+                         </div> --><p class="card-text truncate"><?php echo $row['description'];?></p>
                          <!-- <div class="w-100 d-flex justify-content-between">
                              <span class="rounded-0 btn btn-flat btn-sm btn-primary"><i class="fa fa-tag"></i> <?php // echo number_format($row['cost']) ?></span>
                              <a href="./?page=view_event&id=<?php //echo md5($row['id']) ?>" class="btn btn-sm btn-flat btn-warning">View Event <i class="fa fa-arrow-right"></i></a>
